@@ -18,6 +18,11 @@ $(function() {
                 a.stylesheet.call(a, d);
                 break;
 
+              case "wav":
+                var index = b.replace(/[#\?].*$/, "").substring(b.lastIndexOf(".") - 1,b.lastIndexOf("."));
+                a.audio.call(a, d,index);
+                break;
+
               case "svg":
               case "jpg":
               case "gif":
@@ -31,6 +36,9 @@ $(function() {
     }, PreLoad.prototype.image = function(a) {
         var b = document.createElement("img");
         this.load(b, a), b.src = a;
+    }, PreLoad.prototype.audio = function(a,index) {
+        var b = document.createElement("audio");
+        this.load(b, a), b.src = a, b.id = "audioNPC" + index, document.body.appendChild(b);
     }, PreLoad.prototype.stylesheet = function(a) {
         var b = document.createElement("link");
         this.load(b, a), b.rel = "stylesheet", b.type = "text/css", b.href = a, document.head.appendChild(b);
@@ -48,7 +56,7 @@ $(function() {
             });
         };
     };
-    var resources = [ "./css/index.css","./js/lib/touch.js" ];
+    var resources = [ "./css/index.css","./js/lib/touch.js","./mp3/npc1.wav"];
 
     var images = [
         "./image/swipe_tips.png", 
